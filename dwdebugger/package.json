@@ -1,0 +1,36 @@
+{
+  "name": "dw-debugger",
+  "version": "0.0.1",
+  "description": "Debugger adapter for DW sandboxes",
+  "main": "bin/cli.js",
+  "scripts": {
+    "test": "mocha tests/**/*.js"
+  },
+  "author": "Ilya Volodin <ivolodin@demandware.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "glob": "^7.0.0",
+    "object-assign": "^4.0.1",
+    "optionator": "^0.8.1",
+    "superagent": "^1.7.2",
+    "superagent-prefix": "0.0.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5",
+    "superagent-mocker": "^0.3.0"
+  },
+  "bin": {
+    "dw-debugger": "cli.js"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://rahuldivekar@bitbucket.org/ilyavolodin/dwdebugger.git"
+  },
+  "homepage": "https://bitbucket.org/ilyavolodin/dwdebugger#readme"
+}

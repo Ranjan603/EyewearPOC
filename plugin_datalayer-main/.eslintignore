@@ -1,0 +1,11 @@
+bin/
+codecept.conf.js
+test/unit/dw-api-mock
+cartridges/**/cartridge/static/default/css/
+cartridges/**/cartridge/static/default/js/
+webpack.config.js
+webpackHandling/
+modules
+cartridges/app_storefront_base
+cartridges/bm_app_storefront_base
+cartridges/modules

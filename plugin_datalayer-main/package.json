@@ -1,0 +1,30 @@
+{
+  "name": "plugin_datalayer",
+  "version": "1.0.0",
+  "description": "Datalayer plugin for SFRA",
+  "main": "index.js",
+  "scripts": {
+    "sfra:init": "cd node_modules/sfra && npm install --legacy-peer-deps && npm run compile:js && npm run compile:scss && npm run compile:fonts",
+    "sfra:copy": "rsync -ar ./node_modules/sfra/cartridges/ ./cartridges/",
+    "lint:js": "eslint ."
+  },
+  "dependencies": {
+    "cross-zip-cli": "^1.0.0",
+    "sfcc-ci": "^2.9.1",
+    "sfra": "git+ssh://git@github.com/SalesforceCommerceCloud/storefront-reference-architecture.git#v6.3.0",
+    "shx": "^0.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-sitegenesis": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SalesforceCommerceCloud/plugin_datalayer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/SalesforceCommerceCloud/plugin_datalayer#readme"
+}

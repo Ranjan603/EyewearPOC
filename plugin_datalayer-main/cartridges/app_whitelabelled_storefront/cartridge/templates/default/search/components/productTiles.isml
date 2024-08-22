@@ -1,0 +1,11 @@
+<isloop items="${pdict.productSearch.productIds}" var="product" status="loopstate">
+    <isscript>
+        var position = (pdict.productSearch.pageNumber * pdict.productSearch.pageSize) + loopstate.index + 1;
+    </isscript>
+    <div id="productTileContainer" class="col-6 col-sm-4" data-tracking-position="${position.toFixed(0)}">
+        <isobject object="${product.productSearchHit}" view="searchhit">
+            <isinclude url="${URLUtils.url('Tile-Show', 'pid', product.productID)}" />
+        </isobject>
+    </div>
+</isloop>
+<isprint value="${dw.system.HookMgr.callHook('app.datalayer.search', 'productTilesInclude', pdict) || ''}" encoding="off">

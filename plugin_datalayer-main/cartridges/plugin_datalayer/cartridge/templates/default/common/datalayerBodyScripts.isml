@@ -1,0 +1,32 @@
+<script>
+    (function(){
+        document.addEventListener("click", function(event){
+            var linkNode = event.target.closest('[data-tracking-click-event]');
+            if (linkNode && linkNode.dataset.trackingClickEvent && linkNode.dataset.trackingEventPayload){
+                var trackingEventPayload = JSON.parse(linkNode.dataset.trackingEventPayload);
+                if (trackingEventPayload) {
+                    var position = null;
+                    // check if current node has position attribute
+                    if (linkNode.dataset.trackingPosition){
+                        position = Number(linkNode.dataset.trackingPosition)
+                    } else {
+                        // check for the closest position field
+                        var positionNode = event.target.closest('[data-tracking-position]');
+                        if (positionNode && positionNode.dataset.trackingPosition) {
+                            position = Number(positionNode.dataset.trackingPosition);
+                        }
+                    }
+
+                    if(position){
+                        trackingEventPayload.position = position;
+                    }
+                }
+                var clickEvent = {
+                    event : linkNode.dataset.trackingClickEvent,
+                    payload : trackingEventPayload
+                }
+                window.datalayer.push(clickEvent);
+            }
+        });
+    }());
+</script>

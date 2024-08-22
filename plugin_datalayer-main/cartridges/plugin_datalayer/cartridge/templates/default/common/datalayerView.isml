@@ -1,0 +1,6 @@
+<script>
+    (function(){
+        var view = <isprint value="${ JSON.stringify(require('*/cartridge/scripts/datalayer.js').getDatalayerView())}" encoding="off" />
+        window.dataTrackingView = Object.assign(window.dataTrackingView || {}, ...view);
+    }());
+</script>

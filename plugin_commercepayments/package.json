@@ -1,0 +1,97 @@
+{
+  "name": "plugin_commercepayments",
+  "version": "5.0.0",
+  "description": "Salesforce Payments overlay cartridge",
+  "main": "index.js",
+  "scripts": {
+    "cover": "sgmf-scripts --cover 'test/unit'",
+    "test": "sgmf-scripts --test test/unit/**/*.js",
+    "test:integration": "sgmf-scripts --integration 'test/integration/**/*.js'",
+    "lint": "sgmf-scripts --lint js && sgmf-scripts --lint css",
+    "upload": "sgmf-scripts --upload -- ",
+    "uploadCartridge": "sgmf-scripts --uploadCartridge plugin_commercepayments",
+    "compile:js": "sgmf-scripts --compile js",
+    "compile:scss": "sgmf-scripts --compile css",
+    "resolve:isml": "node resolve.js",
+    "build": "npm run compile:js && npm run compile:scss && npm run resolve:isml"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-subset": "^1.6.0",
+    "css-loader": "^0.28.11",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^5.0.3",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-sitegenesis": "~1.0.0",
+    "husky": "^4.2.5",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
+    "node-sass": "^4.12.0",
+    "postcss-loader": "^2.1.6",
+    "proxyquire": "1.7.4",
+    "request-promise": "^4.2.4",
+    "sass-loader": "^7.3.1",
+    "sgmf-scripts": "^2.3.0",
+    "sinon": "^1.17.7",
+    "stylelint": "^8.4.0",
+    "stylelint-config-standard": "^17.0.0",
+    "stylelint-scss": "^2.5.0"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "ie >= 10"
+  ],
+  "paths": {
+    "base": "../storefront-reference-architecture/cartridges/app_storefront_base/"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run test"
+    }
+  },
+  "resolve": {
+    "cartridgepath": [
+      "app_storefront_base"
+    ],
+    "dependencies": {
+      "app_storefront_base": "../storefront-reference-architecture/cartridges/app_storefront_base/cartridge/templates/"
+    },
+    "target": "./cartridges/plugin_commercepayments/cartridge/templates/LOCALE_TO_REPLACED/_base/",
+    "targets": {
+      "includes": [
+        "./cartridges/plugin_commercepayments/cartridge/templates/default/_base/",
+        "./cartridges/plugin_commercepayments/cartridge/templates/en_GB/_base/",
+        "./cartridges/plugin_commercepayments/cartridge/templates/fr_FR/_base/",
+        "./cartridges/plugin_commercepayments/cartridge/templates/it_IT/_base/",
+        "./cartridges/plugin_commercepayments/cartridge/templates/ja_JP/_base/",
+        "./cartridges/plugin_commercepayments/cartridge/templates/zh_CN/_base/"
+      ]
+    },
+    "templates": {
+      "includes": [
+        "./cartridges/plugin_commercepayments/cartridge/templates/default/",
+        "./cartridges/plugin_commercepayments/cartridge/templates/en_GB/",
+        "./cartridges/plugin_commercepayments/cartridge/templates/fr_FR/",
+        "./cartridges/plugin_commercepayments/cartridge/templates/it_IT/",
+        "./cartridges/plugin_commercepayments/cartridge/templates/ja_JP/",
+        "./cartridges/plugin_commercepayments/cartridge/templates/zh_CN/"
+      ],
+      "excludes": [
+        "./cartridges/plugin_commercepayments/cartridge/templates/default/_commercepayments/",
+        "./cartridges/plugin_commercepayments/cartridge/templates/default/account/addressBook.isml",
+        "./cartridges/plugin_commercepayments/cartridge/templates/default/account/addressBookCard.isml",
+        "./cartridges/plugin_commercepayments/cartridge/templates/en_GB/account/addressBook.isml",
+        "./cartridges/plugin_commercepayments/cartridge/templates/en_GB/account/addressBookCard.isml",
+        "./cartridges/plugin_commercepayments/cartridge/templates/fr_FR/account/addressBook.isml",
+        "./cartridges/plugin_commercepayments/cartridge/templates/fr_FR/account/addressBookCard.isml",
+        "./cartridges/plugin_commercepayments/cartridge/templates/it_IT/account/addressBook.isml",
+        "./cartridges/plugin_commercepayments/cartridge/templates/it_IT/account/addressBookCard.isml",
+        "./cartridges/plugin_commercepayments/cartridge/templates/ja_JP/account/addressBook.isml",
+        "./cartridges/plugin_commercepayments/cartridge/templates/ja_JP/account/addressBookCard.isml",
+        "./cartridges/plugin_commercepayments/cartridge/templates/zh_CN/account/addressBook.isml",
+        "./cartridges/plugin_commercepayments/cartridge/templates/zh_CN/account/addressBookCard.isml"
+      ]
+    }
+  }
+}
