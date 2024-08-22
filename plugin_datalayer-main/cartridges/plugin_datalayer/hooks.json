@@ -1,0 +1,20 @@
+{
+    "hooks": [
+        {
+            "name": "app.datalayer.header",
+            "script": "~/cartridge/scripts/hooks/datalayerHooks"
+        },
+        {
+            "name": "app.datalayer.tile",
+            "script": "~/cartridge/scripts/hooks/datalayerHooks"
+        },
+        {
+            "name": "app.datalayer.search",
+            "script": "~/cartridge/scripts/hooks/datalayerHooks"
+        },
+        {
+            "name": "app.datalayer.event",
+            "script": "~/cartridge/scripts/hooks/datalayerHooks"
+        }
+    ]
+}

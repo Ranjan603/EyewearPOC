@@ -1,0 +1,7 @@
+<isinclude url="${URLUtils.url('Page-UncachedData')}" />
+<isinclude template="/common/datalayerView" />
+
+<script>
+    window.datalayer = [window.dataTrackingView];
+</script>
+

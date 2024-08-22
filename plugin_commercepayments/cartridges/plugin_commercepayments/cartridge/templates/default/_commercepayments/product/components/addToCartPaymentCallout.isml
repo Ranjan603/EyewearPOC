@@ -1,0 +1,6 @@
+<isset name="paymentmessagesclass" value="salesforce-buynow-messages-element" scope="page">
+<isset name="paymentmessagesrequest" value="${product.paymentMessagesRequest}" scope="page">
+
+<isif condition="${product.paymentMessagesRequest}">
+    <isinclude template="_commercepayments/components/paymentMessages" sf-toolkit="off"/>
+</isif>

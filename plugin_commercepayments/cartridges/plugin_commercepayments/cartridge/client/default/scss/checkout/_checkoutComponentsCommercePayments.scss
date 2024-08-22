@@ -1,0 +1,55 @@
+.commercepayments .card.payment-method {
+    .card-header {
+        border-bottom: 0;
+    }
+
+    .card-body {
+        padding: 0;
+    }
+}
+
+.salesforce-payments-element-errors {
+    margin-bottom: 0.75rem;
+}
+
+.salesforce-payments-errors:empty {
+    display: none;
+}
+
+.salesforce-payments-element .sfpp-payment-method-choice,
+.salesforce-payments-element .sfpp-payment-method-choice .sfpp-payment-method-body,
+.sfpp-payment-method-ideal-bank-element,
+.sfpp-payment-method-eps-bank-element,
+.sfpp-payment-method-iban-element {
+    border-color: rgba(0, 0, 0, 0.125);
+}
+
+.sfpp-payment-method-card-number-label::before,
+.sfpp-payment-method-card-expiry-label::before,
+.sfpp-payment-method-card-cvc-label::before,
+.sfpp-payment-method-iban-label::before {
+    content: "*";
+    color: $danger;
+}
+
+.sfpp-payment-method-body-card .sfpp-payment-method-card-number-element,
+.sfpp-payment-method-body-card .sfpp-payment-method-card-expiry-element,
+.sfpp-payment-method-body-card .sfpp-payment-method-card-cvc-element,
+.sfpp-payment-method-body-eps .sfpp-payment-method-eps-bank-element,
+.sfpp-payment-method-body-ideal .sfpp-payment-method-ideal-bank-element,
+.sfpp-payment-method-body-sepa_debit .sfpp-payment-method-iban-element {
+    border-color: rgba(0, 0, 0, 0.125);
+    border-radius: $border-radius;
+}
+
+.sfpp-payment-method-body .sfpp-payment-method-element--invalid {
+    border-color: $danger;
+}
+
+.salesforce-payments-element .sfpp-payment-instrument {
+    border-color: rgba(0, 0, 0, 0.125);
+}
+
+.salesforce-payments-element .sfpp-payment-instrument .sfpp-payment-instrument-description {
+    font-size: 0.938em;
+}

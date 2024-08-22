@@ -1,0 +1,8 @@
+<fieldset class="salesforce-payments-fields">
+    <div class="salesforce-payments-element"
+        data-preparestripepayment="${URLUtils.url('CommercePaymentsCheckoutServices-PrepareStripePayment', dw.web.CSRFProtection.getTokenName(), dw.web.CSRFProtection.generateToken())}"
+        data-placeorder="${URLUtils.url('CommercePaymentsCheckoutServices-PlaceOrder', dw.web.CSRFProtection.getTokenName(), dw.web.CSRFProtection.generateToken())}"
+    ></div>
+
+    <ispayment payment-request="${pdict.multiStepPaymentRequest}"></ispayment>
+</fieldset>

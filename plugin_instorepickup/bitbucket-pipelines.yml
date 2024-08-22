@@ -1,0 +1,40 @@
+# This is a sample build configuration for JavaScript.
+# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: node:6.9.4
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - node
+        script: # Modify the commands below to build your repository.
+          - npm install
+          - npm run lint
+          - npm test
+          - export cloneDir=$(pwd) # Gets directory of In store pickup plugin
+
+          - cd ..
+          - git clone git@bitbucket.org:demandware/storefront-reference-architecture.git # Updates base repo
+          - cd ./storefront-reference-architecture
+          - git checkout integration
+          - npm install
+          - npm run compile:js
+          - npm run compile:scss
+          - npm run compile:fonts
+
+          # HOSTNAME_VPOD is an additonal server to test BOPIS functionality along with addtional cartridges added.
+          - node node_modules/.bin/dwupload --hostname ${HOSTNAME_VPOD} --username ${USERNAME_VPOD} --password "${PASSWORD_VPOD}" --cartridge cartridges/app_storefront_base
+          - node node_modules/.bin/dwupload --hostname ${HOSTNAME_VPOD} --username ${USERNAME_VPOD} --password "${PASSWORD_VPOD}" --cartridge cartridges/modules
+
+          # Back to Instore pickup plugin to execute
+          - cd ..
+          - cd $cloneDir
+          - npm run compile:js
+          - npm run compile:scss
+
+          # Runs tests with only BOPIS Integration Tests
+          - node node_modules/.bin/dwupload --hostname ${HOSTNAME_VPOD} --username ${USERNAME_VPOD} --password "${PASSWORD_VPOD}" --cartridge cartridges/plugin_instorepickup
+          - npm run test:integration -- --baseUrl https://${HOSTNAME_VPOD}/on/demandware.store/Sites-MobileFirst-Site/en_US "test/integration/*"

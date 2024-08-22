@@ -1,0 +1,15 @@
+<isif condition="${buynowproduct.paymentRequest}">
+    <div class="salesforce-buynow-element"
+        data-preparebasket="${URLUtils.url('CommercePaymentsCheckoutServices-PrepareBasket')}"
+        data-shippingaddresschange="${URLUtils.url('CommercePaymentsCheckoutServices-ShippingAddressChange')}"
+        data-shippingoptionchange="${URLUtils.url('CommercePaymentsCheckoutServices-ShippingOptionChange')}"
+        data-paymentmethod="${URLUtils.url('CommercePaymentsCheckoutServices-PaymentMethod')}"
+        data-preparestripepayment="${URLUtils.url('CommercePaymentsCheckoutServices-PrepareStripePayment', dw.web.CSRFProtection.getTokenName(), dw.web.CSRFProtection.generateToken())}"
+        data-submitorder = "${URLUtils.url('CommercePaymentsCheckoutServices-SubmitOrder', dw.web.CSRFProtection.getTokenName(), dw.web.CSRFProtection.generateToken())}"
+        data-failorder = "${URLUtils.url('CommercePaymentsCheckoutServices-FailOrder', dw.web.CSRFProtection.getTokenName(), dw.web.CSRFProtection.generateToken())}"
+        data-paypalapprove="${URLUtils.url('CommercePaymentsCheckoutServices-PayPalOrderApproved')}"
+        ${!buynowproduct.readyToOrder || !buynowproduct.available ? "disabled" : ""}></div>
+    <div class="salesforce-buynow-element-errors salesforce-payments-errors"></div>
+
+    <isbuynow payment-request="${buynowproduct.paymentRequest}"></isbuynow>
+</isif>

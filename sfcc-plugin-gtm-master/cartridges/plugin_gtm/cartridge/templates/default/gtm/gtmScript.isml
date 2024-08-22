@@ -1,0 +1,101 @@
+<script>
+    var pageAction = '${pdict.action.replace("-", "").toLowerCase()}';
+    window.dataLayer = window.dataLayer || [];
+    window.gtmEnabled = <isprint value="${pdict.gtmEnabled}" encoding="off"/>;
+    var orderId = -1;
+    var dataLayerEvent = <isprint value="${pdict.datalayer}" encoding="off"/>;
+    var ga4DataLayerEvent = <isprint value="${pdict.ga4datalayer}" encoding="off"/>;
+
+    // In all cases except Order Confirmation, the data layer should be pushed, so default to that case
+    var pushDataLayer = true;
+    if (pageAction === 'orderconfirm') {
+        // As of now, the correction is for order confirmation only
+        if (dataLayerEvent) {
+            orderId = getOrderId(dataLayerEvent);
+        } else {
+            orderId = getGA4OrderId(ga4DataLayerEvent);
+        }
+
+        var ordersPushedToGoogle = getOrdersPushedToGoogle();
+        var orderHasBeenPushedToGoogle = orderHasBeenPushedToGoogle(orderId, ordersPushedToGoogle);
+        if (orderHasBeenPushedToGoogle) {
+            // If the data has already been sent, let's not push it again.
+            pushDataLayer = false;
+        }
+    }
+
+    if (pushDataLayer) {
+        if (dataLayerEvent) {
+            dataLayer.push(dataLayerEvent);
+        }
+
+        // If both events active, clear first ecommerce object to prevent events affecting one another
+        if (dataLayerEvent && ga4DataLayerEvent) {
+            dataLayer.push({ ecommerce: null });
+        }
+
+        if (ga4DataLayerEvent) {
+            dataLayer.push(ga4DataLayerEvent);
+        }
+
+        if (pageAction === 'orderconfirm') {
+            // Add the orderId to the array of orders that is being stored in localStorage
+            ordersPushedToGoogle.push(orderId);
+            // The localStorage is what is used to prevent the duplicate send from mobile platforms
+            window.localStorage.setItem('ordersPushedToGoogle', JSON.stringify(ordersPushedToGoogle));
+        }
+    }
+
+    function getOrderId(dataLayer) {
+        if ('ecommerce' in dataLayer) {
+            if ('purchase' in dataLayer.ecommerce && 'actionField' in dataLayer.ecommerce.purchase &&
+                'id' in dataLayer.ecommerce.purchase.actionField) {
+                return dataLayer.ecommerce.purchase.actionField.id;
+            }
+        }
+
+        return -1;
+    }
+
+    function getGA4OrderId(dataLayer) {
+        if ('ecommerce' in dataLayer && 'transaction_id' in dataLayer.ecommerce) {
+            return dataLayer.ecommerce.transaction_id;
+        }
+
+        return -1;
+    }
+
+    function getOrdersPushedToGoogle() {
+        var ordersPushedToGoogleString = window.localStorage.getItem('ordersPushedToGoogle');
+        if (ordersPushedToGoogleString && ordersPushedToGoogleString.length > 0) {
+            return JSON.parse(ordersPushedToGoogleString);
+        }
+
+        return [];
+    }
+
+    function orderHasBeenPushedToGoogle(orderId, ordersPushedToGoogle) {
+        if (orderId) {
+            for (var index = 0; index < ordersPushedToGoogle.length; index++) {
+                if (ordersPushedToGoogle[index] === orderId) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+</script>
+<iscomment>Remote include for customer specific data</iscomment>
+<isinclude url="${URLUtils.url('GTM-CustomerData')}"/>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${pdict.id}');</script>
+<!-- End Google Tag Manager -->
+
+<iscomment>This is where GTM events are initialized</iscomment>
+<script defer src="${URLUtils.staticURL('/js/tagmanager.js')}"></script>

@@ -1,0 +1,16 @@
+<script type="module">
+    const view = <isprint value="${ JSON.stringify(require('*/cartridge/scripts/datalayer.js').getDatalayerEvent())}" encoding="off" />
+    const event = Object.assign({}, ...view);
+
+    document.querySelectorAll('[data-tracking-product-tile]').forEach(function(node){
+        const view = JSON.parse(node.dataset.trackingProductTile);
+        const tileContainer = node.closest('[data-tracking-position]');
+        const tilePosition = parseInt(tileContainer.dataset.trackingPosition) || undefined;
+        let tileObj = Object.assign({}, ...view);
+        tileObj.position = tilePosition;
+        event.products.push(tileObj);
+
+        delete node.dataset.trackingProductTile
+    });
+    window.datalayer.push(event);
+</script>

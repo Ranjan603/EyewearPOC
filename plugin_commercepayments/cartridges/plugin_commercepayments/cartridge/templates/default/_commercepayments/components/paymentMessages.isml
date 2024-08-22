@@ -1,0 +1,2 @@
+<div class="salesforce-payment-messaging ${paymentmessagesclass}"></div>
+<ispaymentmessages payment-request="${paymentmessagesrequest}"></ispaymentmessages>

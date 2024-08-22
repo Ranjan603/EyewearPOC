@@ -1,0 +1,121 @@
+.commercepayments.data-checkout-stage {
+    .card.ghost {
+        display: none;
+    }
+
+    .salesforce-paymentrequest-element {
+        display: none;
+    }
+
+    // Customer ------------------------------
+    &[data-checkout-stage=customer] {
+        .payment-form {
+            display: none;
+        }
+
+        .salesforce-paymentrequest-element:not([disabled]) {
+            display: block;
+        }
+    }
+
+    // Shipping ------------------------------
+    &[data-checkout-stage=shipping] {
+        .payment-form {
+            display: none;
+        }
+    }
+
+    // Payment -------------------------------
+    &[data-checkout-stage=payment] {
+        .customer-section {
+            display: none;
+        }
+
+        .shipping-section {
+            display: none;
+        }
+
+        button.place-order {
+            display: block;
+        }
+    }
+}
+
+.express-checkout-buttons {
+    min-height: 2.75rem;
+}
+
+.salesforce-paymentrequest-element {
+    line-height: 0;
+    min-height: 40px;
+    border: $card-border-width solid transparent;
+    padding: 0 $card-spacer-x;
+
+    &:not(.salesforce-paymentrequest-element-loading) {
+        // 2 buttons horizontal 50%
+        div:first-child:nth-last-child(2),
+        div:first-child:nth-last-child(2) ~ div {
+            display: inline-block;
+            width: 50%;
+            padding: 0 0.25rem;
+            margin-top: 0;
+        }
+
+        div:first-child:nth-last-child(2) {
+            padding: 0 0.25rem 0 0;
+        }
+
+        div:first-child:nth-last-child(2) ~ div {
+            padding: 0 0 0 0.25rem;
+        }
+    }
+}
+
+.salesforce-paymentrequest-element-loading {
+    div {
+        display: none;
+    }
+
+    > div.salesforce-paymentrequest-element-skeletons {
+        display: block;
+
+        .salesforce-paymentrequest-element-skeleton {
+            display: block;
+        }
+
+        // 2 buttons horizontal 50%
+        div:first-child:nth-last-child(2),
+        div:first-child:nth-last-child(2) ~ div {
+            display: inline-block;
+            width: 50%;
+            margin-top: 0;
+        }
+
+        div:first-child:nth-last-child(2) {
+            padding: 0 0.25rem 0 0;
+        }
+
+        div:first-child:nth-last-child(2) ~ div {
+            padding: 0 0 0 0.25rem;
+        }
+    }
+}
+
+@keyframes express-checkout-buttons-background {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 200% 0;
+    }
+}
+
+.salesforce-paymentrequest-element-skeleton button {
+    background: $grey1; /* For browsers that do not support gradients */
+    background: linear-gradient(45deg, $grey3, $grey2, $grey3, $grey2, $grey3, $grey2, $grey3, $grey2, $grey3, $grey2); /* Standard syntax */
+    background-size: 200% 200%;
+    animation: express-checkout-buttons-background 10s linear infinite;
+    width: 100%;
+    height: 40px;
+}
