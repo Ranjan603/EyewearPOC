@@ -1,0 +1,1 @@
+data-tracking-product-tile="${ JSON.stringify(require('*/cartridge/scripts/datalayer.js').getDatalayerView()) }"

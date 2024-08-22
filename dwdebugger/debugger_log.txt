@@ -1,0 +1,75 @@
+Server request________________________
+{"command":"evaluate","arguments":{"expression":"process.pid","global":true},"type":"request","seq":1}
+______________________________________
+Server response_______________________
+{"seq":2,"type":"response","success":true,"running":true,"request_seq":1,"command":"evaluate","body":"not supported"}
+______________________________________
+Server request________________________
+{"command":"evaluate","arguments":{"expression":"/*---------------------------------------------------------------------------------------------\r\n *  Copyright (c) Microsoft Corporation. All rights reserved.\r\n *  Licensed under the MIT License. See License.txt in the project root for license information.\r\n *--------------------------------------------------------------------------------------------*/\r\n!function () {\r\n    var vm = require('vm');\r\n    var LookupMirror = vm.runInDebugContext('LookupMirror');\r\n    var PropertyKind = vm.runInDebugContext('PropertyKind');\r\n    var DebugCommandProcessor = vm.runInDebugContext('DebugCommandProcessor');\r\n    var JSONProtocolSerializer = vm.runInDebugContext('JSONProtocolSerializer');\r\n    JSONProtocolSerializer.prototype.serializeReferencedObjects = function () {\r\n        var content = [];\r\n        for (var i = 0; i < this.mirrors_.length; i++) {\r\n            var m = this.mirrors_[i];\r\n            if (m.isArray())\r\n                continue;\r\n            if (m.isObject() && m.propertyNames(PropertyKind.Indexed | PropertyKind.Named, 100).length >= 100)\r\n                continue;\r\n            content.push(this.serialize_(m, false, false));\r\n        }\r\n        return content;\r\n    };\r\n    DebugCommandProcessor.prototype.dispatch_['vscode_range'] = function (request, response) {\r\n        var handle = request.arguments.handle;\r\n        var from_index = request.arguments.from;\r\n        var to_index = request.arguments.to;\r\n        var mirror = LookupMirror(handle);\r\n        if (!mirror) {\r\n            return response.failed('Object #' + handle + '# not found');\r\n        }\r\n        var result;\r\n        if (mirror.isArray()) {\r\n            result = new Array(to_index - from_index + 1);\r\n            var a = mirror.indexedPropertiesFromRange(from_index, to_index);\r\n            for (var i = 0; i < a.length; i++) {\r\n                result[i] = a[i].value();\r\n            }\r\n        }\r\n        else if (mirror.isObject()) {\r\n            result = new Array(to_index - from_index + 1);\r\n            for (var j = from_index; j <= to_index; j++) {\r\n                var p = mirror.property(j.toString());\r\n                result[j - from_index] = p.value();\r\n            }\r\n        }\r\n        else {\r\n            result = new Array(to_index - from_index + 1);\r\n        }\r\n        response.body = {\r\n            result: result\r\n        };\r\n    };\r\n    DebugCommandProcessor.prototype.vscode_dehydrate = function (mirror) {\r\n        var className = null;\r\n        var size = -1;\r\n        if (mirror.isArray()) {\r\n            className = \"Array\";\r\n            size = mirror.length();\r\n        }\r\n        else if (mirror.isObject()) {\r\n            switch (mirror.toText()) {\r\n                case \"#<Buffer>\":\r\n                    className = \"Buffer\";\r\n                    size = mirror.propertyNames(PropertyKind.Indexed).length;\r\n                    break;\r\n                case \"#<Int8Array>\":\r\n                case \"#<Uint8Array>\":\r\n                case \"#<Uint8ClampedArray>\":\r\n                case \"#<Int16Array>\":\r\n                case \"#<Uint16Array>\":\r\n                case \"#<Int32Array>\":\r\n                case \"#<Uint32Array>\":\r\n                case \"#<Float32Array>\":\r\n                case \"#<Float64Array>\":\r\n                    className = mirror.className();\r\n                    size = mirror.propertyNames(PropertyKind.Indexed).length;\r\n                    break;\r\n                default:\r\n                    break;\r\n            }\r\n        }\r\n        if (size > 1000) {\r\n            return {\r\n                handle: mirror.handle(),\r\n                type: \"object\",\r\n                className: className,\r\n                size: size,\r\n                value: className\r\n            };\r\n        }\r\n        return mirror;\r\n    };\r\n    DebugCommandProcessor.prototype.dispatch_['vscode_lookup'] = function (request, response) {\r\n        var result = this.lookupRequest_(request, response);\r\n        if (!result) {\r\n            var handles = request.arguments.handles;\r\n            for (var i = 0; i < handles.length; i++) {\r\n                var handle = handles[i];\r\n                response.body[handle] = this.vscode_dehydrate(response.body[handle]);\r\n            }\r\n        }\r\n        return result;\r\n    };\r\n    DebugCommandProcessor.prototype.dispatch_['vscode_evaluate'] = function (request, response) {\r\n        var result = this.evaluateRequest_(request, response);\r\n        if (!result) {\r\n            response.body = this.vscode_dehydrate(response.body);\r\n        }\r\n        return result;\r\n    };\r\n}();\r\n//# sourceMappingURL=debugExtension.js.map"},"type":"request","seq":2}
+______________________________________
+Server response_______________________
+{"seq":3,"type":"response","success":true,"running":true,"request_seq":2,"command":"evaluate","body":"not supported"}
+______________________________________
+Server request________________________
+{"command":"frame","type":"request","seq":3}
+______________________________________
+Server response_______________________
+{"seq":4,"type":"response","success":false,"running":true,"request_seq":3,"command":"frame","message":"No frames"}
+______________________________________
+Server request________________________
+{"command":"setexceptionbreak","arguments":{"type":"all","enabled":false},"type":"request","seq":4}
+______________________________________
+Server response_______________________
+{"seq":5,"type":"response","success":true,"running":true,"request_seq":4,"command":"setexceptionbreak","body":{"type":"all","enabled":false}}
+______________________________________
+Server request________________________
+{"command":"setexceptionbreak","arguments":{"type":"uncaught","enabled":false},"type":"request","seq":5}
+______________________________________
+Server response_______________________
+{"seq":6,"type":"response","success":true,"running":true,"request_seq":5,"command":"setexceptionbreak","body":{"type":"uncaught","enabled":false}}
+______________________________________
+Server request________________________
+{"command":"setexceptionbreak","arguments":{"type":"uncaught","enabled":true},"type":"request","seq":6}
+______________________________________
+Server response_______________________
+{"seq":7,"type":"response","success":true,"running":true,"request_seq":6,"command":"setexceptionbreak","body":{"type":"uncaught","enabled":true}}
+______________________________________
+Server request________________________
+{"command":"continue","type":"request","seq":7}
+______________________________________
+Server response_______________________
+{"seq":8,"type":"response","success":true,"running":true,"request_seq":7,"command":"continue","body":""}
+______________________________________
+Server request________________________
+{"command":"listbreakpoints","type":"request","seq":8}
+______________________________________
+Server response_______________________
+{"seq":9,"type":"response","success":true,"running":true,"request_seq":8,"command":"listbreakpoints","body":{"breakpoints":[],"breakOnExceptions":false,"breakOnUncaughtExceptions":false}}
+______________________________________
+Server request________________________
+{"command":"setbreakpoint","arguments":{"line":5,"column":0,"type":"scriptRegExp","target":"^(.*[\\/\\\\])?\\/Users\\/ivolodin\\/Documents\\/Code\\/sitegenesis-new\\/app_storefront_base\\/cartridge\\/controllers\\/Product\\.js$"},"type":"request","seq":9}
+______________________________________
+Server response_______________________
+{"seq":10,"type":"response","success":true,"running":true,"request_seq":9,"command":"setbreakpoint","body":{"type":"scriptRegExp","breakpoint":1,"script_regexp":"^(.*[\\/\\\\])?\\/Users\\/ivolodin\\/Documents\\/Code\\/sitegenesis-new\\/app_storefront_base\\/cartridge\\/controllers\\/Product\\.js$","line":5,"column":0,"actual_locations":[{"line":5,"column":4,"script_id":42}]}}
+______________________________________
+Server request________________________
+{"command":"listbreakpoints","type":"request","seq":8}
+______________________________________
+Server response_______________________
+{"seq":9,"type":"response","success":true,"running":true,"request_seq":8,"command":"listbreakpoints","body":{"breakpoints":[],"breakOnExceptions":false,"breakOnUncaughtExceptions":false}}
+______________________________________
+Server request________________________
+{"command":"setbreakpoint","arguments":{"line":5,"column":0,"type":"scriptRegExp","target":"^(.*[\\/\\\\])?\\/Users\\/ivolodin\\/Documents\\/Code\\/sitegenesis-new\\/app_storefront_base\\/cartridge\\/controllers\\/Product\\.js$"},"type":"request","seq":9}
+______________________________________
+Server response_______________________
+{"seq":10,"type":"response","success":true,"running":true,"request_seq":9,"command":"setbreakpoint","body":{"type":"scriptRegExp","breakpoint":1,"script_regexp":"^(.*[\\/\\\\])?\\/Users\\/ivolodin\\/Documents\\/Code\\/sitegenesis-new\\/app_storefront_base\\/cartridge\\/controllers\\/Product\\.js$","line":5,"column":0,"actual_locations":[{"line":5,"column":4,"script_id":42}]}}
+______________________________________
+Server response_______________________
+{"seq":11,"type":"event","event":"break","body":{"invocationText":"#{Object}.[anonymous]()","sourceLine":5,"sourceColumn":4,"sourceLineText":"    next();","script":{"id":42,"name":"/Users/ivolodin/Documents/Code/sitegenesis-new/app_storefront_base/cartridge/controllers/Product.js","lineOffset":0,"columnOffset":0,"lineCount":10},"breakpoints":[1]}}
+______________________________________
+Server request________________________
+{"command":"threads","type":"request","seq":10}
+______________________________________
+Server response_______________________
+{"seq":11,"type":"response","success":true,"running":false,"request_seq":10,"command":"threads","body":{"totalThreads":1,"threads":[{"current":true,"id":2}]},"refs":[]}
+______________________________________

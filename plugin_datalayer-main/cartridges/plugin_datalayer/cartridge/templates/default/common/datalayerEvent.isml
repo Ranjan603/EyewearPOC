@@ -1,0 +1,4 @@
+<script type="module">
+    const event = <isprint value="${ JSON.stringify(require('*/cartridge/scripts/datalayer.js').getDatalayerEvent())}" encoding="off" />
+    window.datalayer.push(...event);
+</script>

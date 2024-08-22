@@ -1,0 +1,32 @@
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js'); assets.addCss('/css/homePage.css');
+</isscript>
+
+<div id="InsuranceFormModalContent" class="center InsuranceFormModalContent">
+    <div class="modal-body" id="InsuranceFormPopupBody">
+        <button id="popupCloseBtn">
+            <span id="popupClose">x</span>
+        </button>
+        <h4 id="pop-up-header">Choose Your Insurance With Us</h4>
+        <form action="${URLUtils.url('Insurance-UpdatePrices')}" method="post" name="insurance" ${pdict.insuranceForm.attributes}>
+            <fieldset class="tab" id="tab1">
+                <label class="form-control-label" for="insurance">
+                    <isprint value="${pdict.insuranceForm.insurance.label}" encoding="htmlcontent" />
+                </label>
+                <select class="form-control" id="insurance" name="insurance">
+                    <isloop items=${pdict.insuranceForm.insurance.options} var="option">
+                        <option id="${option.id}" value="${option.htmlValue}" <isif condition="${option.selected}">selected</isif>>${option.label}</option>
+                    </isloop>
+                </select>
+            </fieldset>
+            <fieldset class="tab popNone" id="tab2">
+                <input placeholder="First Name" name="FirstN" class="form-control t2Input" />
+                <input placeholder="Last Name" name="LastN" class="form-control t2Input" />
+                <input placeholder="Date of Birth(mm/dd/yyyy)" name="dob" type="date" class="form-control t2Input" />
+                <input placeholder="Enter Last 4 SSN or Member ID" name="ssn" class="form-control t2Input" />
+            </fieldset>
+            <button name="continue" id="conti-nue" class="popView" type="button">Continue</button>
+            <button type="submit" name="submit" value="submit" id="sub-mit" class="popNone">Submit</button>
+        </form>
+    </div>
+</div>

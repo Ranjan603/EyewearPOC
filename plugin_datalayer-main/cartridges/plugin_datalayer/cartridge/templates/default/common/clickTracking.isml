@@ -1,0 +1,2 @@
+
+data-tracking-click-event="${pdict.event}" data-tracking-event-payload="${pdict.payload ? JSON.stringify(pdict.payload) : null}"

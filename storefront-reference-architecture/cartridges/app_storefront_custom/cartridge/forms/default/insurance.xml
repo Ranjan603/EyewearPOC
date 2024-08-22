@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+	<field formid="insurance" label="Select an isurance" type="string" mandatory="true" >
+		<options>
+			<option optionid="" 	label="resource.select" 		value=""/>
+
+			<!-- regular US insurances -->
+			<option optionid="VSP" 	label="insurance.option.1" 		value="VSP"/>
+			<option optionid="MTL" 	label="insurance.option.2" 		value="METLIFE"/>
+			<option optionid="VC" 	label="insurance.option.3" 	value="CIGNA VISION"/>
+		</options>
+	</field>
+    <action formid="submit" valid-form="true"/>
+    <action formid="cancel" valid-form="false"/>
+</form>

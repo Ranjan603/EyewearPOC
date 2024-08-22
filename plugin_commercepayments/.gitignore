@@ -1,0 +1,14 @@
+node_modules/
+coverage/
+cartridges/*/cartridge/static/*/css/
+cartridges/*/cartridge/static/*/js/
+cartridges/*/cartridge/static/*/fonts/
+cartridges/*/cartridge/templates/*/_base
+npm-debug.log
+cartridges.zip
+.idea/
+dw.json
+.DS_Store
+tmp/
+test/integration/config.json
+/.vscode

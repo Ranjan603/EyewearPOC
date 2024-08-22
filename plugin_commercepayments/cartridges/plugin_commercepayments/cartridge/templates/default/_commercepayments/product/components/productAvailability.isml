@@ -1,0 +1,7 @@
+<!-- Availability -->
+<div class="row availability product-availability" data-ready-to-order="${product.readyToOrder}" data-available="${product.available}">
+    <isinclude template="product/components/availability" />
+    <div class="col-12">
+        <isinclude template="product/components/addToCartPaymentCallout"/>
+    </div>
+</div>

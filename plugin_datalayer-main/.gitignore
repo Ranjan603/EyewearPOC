@@ -1,0 +1,9 @@
+node_modules/
+.vscode
+cartridges/app_storefront_base
+cartridges/plugin_datalayer/cartridge/static
+cartridges/bm_app_storefront_base
+cartridges/modules
+dw.json
+.sfdx
+.DS_Store
