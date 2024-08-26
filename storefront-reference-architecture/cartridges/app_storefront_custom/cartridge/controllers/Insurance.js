@@ -31,9 +31,9 @@ server.post('UpdatePrices', consentTracking.consent, cache.applyDefaultCache, fu
     var pageMetaHelper = require('*/cartridge/scripts/helpers/pageMetaHelper');
     var PriceBookMgr = require('dw/catalog/PriceBookMgr');
     var Transaction = require('dw/system/Transaction');
-
+ 
     pageMetaHelper.setPageMetaTags(req.pageMetaData, Site.current);
-
+ 
     var insValue = req.form.insurance;
     var priceBook;
     if (insValue === 'VSP'){
@@ -42,30 +42,26 @@ server.post('UpdatePrices', consentTracking.consent, cache.applyDefaultCache, fu
     else if (insValue === 'METLIFE' || insValue === 'CIGNA VISION'){
         priceBook = PriceBookMgr.getPriceBook('usd-demo-insurance-prices-METLIFE');
     }
-
+ 
     var defPriceBook = PriceBookMgr.getPriceBook('usd-m-list-prices');
-    
+   
     if (priceBook) {
         // Set the applicable price books for the session
         Transaction.wrap(function() {
             PriceBookMgr.setApplicablePriceBooks([priceBook,defPriceBook]);
         });
     }
-    var tmp = PriceBookMgr.getApplicablePriceBooks();
-    var cs = req.session.clickStream.clicks;
-    var lastClick = cs[cs.length-3];
-    var currentUrl = URLUtils.https(lastClick.pipelineName,lastClick.queryString).toString();
-
-    //var currentUrl = req.httpHeaders.referer;
-
-    currentUrl = null;
-
+ 
+    session.custom.insuranceApplied = insValue;
+ 
+    var currentUrl = req.httpHeaders.referer;
+ 
     if (currentUrl) {
-        res.redirect(decodeURIComponent(currentUrl));
+        res.redirect(currentUrl);
     } else {
         res.redirect(URLUtils.url('Home-Show'));
     }
-
+ 
     next();
 });
 
