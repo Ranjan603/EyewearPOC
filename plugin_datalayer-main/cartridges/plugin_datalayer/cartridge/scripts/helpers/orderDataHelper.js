@@ -123,6 +123,7 @@ function getOrderData(orderModel, page) {
         shipping: apiOrder.shippingTotalGrossPrice.value,
         discount: apiOrder.merchandizeTotalGrossPrice.subtract(apiOrder.adjustedMerchandizeTotalGrossPrice).value,
         coupon: getCouponCodes(orderModel),
+        insuranceApplied: session.custom.insuranceApplied,
         step: stepMapping[page]
     };
 

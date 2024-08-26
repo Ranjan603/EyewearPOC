@@ -52,6 +52,8 @@ server.post('UpdatePrices', consentTracking.consent, cache.applyDefaultCache, fu
         });
     }
 
+    session.custom.insuranceApplied = insValue;
+
     var currentUrl = req.httpHeaders.referer;
 
     if (currentUrl) {
