@@ -51,17 +51,11 @@ server.post('UpdatePrices', consentTracking.consent, cache.applyDefaultCache, fu
             PriceBookMgr.setApplicablePriceBooks([priceBook,defPriceBook]);
         });
     }
-    var tmp = PriceBookMgr.getApplicablePriceBooks();
-    var cs = req.session.clickStream.clicks;
-    var lastClick = cs[cs.length-3];
-    var currentUrl = URLUtils.https(lastClick.pipelineName,lastClick.queryString).toString();
 
-    //var currentUrl = req.httpHeaders.referer;
-
-    currentUrl = null;
+    var currentUrl = req.httpHeaders.referer;
 
     if (currentUrl) {
-        res.redirect(decodeURIComponent(currentUrl));
+        res.redirect(currentUrl);
     } else {
         res.redirect(URLUtils.url('Home-Show'));
     }
