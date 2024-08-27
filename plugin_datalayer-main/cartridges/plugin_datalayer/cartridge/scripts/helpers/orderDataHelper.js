@@ -126,7 +126,7 @@ function getOrderData(orderModel, page) {
         insuranceApplied: session.custom.insuranceApplied,
         step: stepMapping[page]
     };
-
+ 
     return data;
 }
 
