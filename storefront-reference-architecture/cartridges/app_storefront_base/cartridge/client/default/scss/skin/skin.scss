@@ -4,7 +4,7 @@ body,
 .hero {
     background-color: var(--skin-background-color-1);
     font-family: var(--skin-body-font);
-    color: var(--skin-main-text-color-1);
+    color: var(--skin-link-color-1);
 }
 
 .hero {
@@ -12,7 +12,48 @@ body,
 }
 
 .main-menu {
-    background-color: #da3b3b;
+    background-color: #483248;
+}
+
+
+footer {
+    background-color: #483248;
+}
+
+.footer-container.row {
+    color: var(--skin-menu-color-1-invert);
+}
+
+.footer-container a {
+    color: var(--skin-menu-color-1-invert);
+  }
+
+.col-lg-4.col-sm-5.push-sm-7.push-lg-8.social a {
+    color: var(--skin-menu-color-1-invert);
+  }
+
+.content-asset {
+    color: var(--skin-menu-color-1-invert);
+  }
+
+h1.page-title::before {
+    background-color: #856685;
+}
+
+h1.page-title {
+    background-color: #856685;
+}
+
+@media (min-width: 544px) {
+    .d-sm-block {
+        display: block !important;
+        font-weight: bold;
+    }
+}
+
+.brand img {
+    width: 88%;
+    transform: translateY(-8px);
 }
 
 .banner-color {
@@ -25,12 +66,12 @@ body,
 }
 
 .header-banner .close-button .close {
-    background-color: var(--skin-primary-color-1);
+    background-color: #856685;
 }
 
 h1.header.page-title,
 h1.header.page-title::before {
-    background-color: var(--skin-heading-color-1);
+    
     color: var(--skin-heading-color-1-invert);
 }
 
@@ -40,7 +81,7 @@ h1.header.page-title::before {
 }
 
 .refinements ul li button {
-    color: var(--skin-primary-color-1);
+    color: #856685;
 }
 
 .custom-select {
@@ -48,12 +89,10 @@ h1.header.page-title::before {
     color: var(--skin-selectbox-text-color-1);
 }
 
-a {
-    color: var(--skin-link-color-1);
-}
+
 
 .price {
-    color: var(--skin-price-1);
+    
 }
 
 .dropdown-menu,
@@ -92,34 +131,34 @@ a {
 }
 
 .btn-primary {
-    background-color: #{var(--skin-primary-color-1)};
-    border-color: #{var(--skin-primary-color-1)};
+    background-color: #{#856685};
+    border-color: #{#856685};
     color: var(--skin-primary-color-invert-1);
 }
 
 .btn-primary:hover {
-    color: #{var(--skin-primary-color-1)};
-    border-color: #{var(--skin-primary-color-1)};
+    color: #{#856685};
+    border-color: #{#856685};
     background-color: var(--skin-primary-color-invert-1);
 }
 
 .btn-primary.disabled,
 .btn-primary:disabled {
-    background-color: var(--skin-primary-color-1);
+    background-color: #856685;
     border-color: var(--skin-primary-color);
     color: var(--skin-primary-color-invert-1);
     opacity: 0.5;
 }
 
 .btn-outline-primary {
-    color: var(--skin-primary-color-1);
-    border-color: var(--skin-primary-color-1);
+    color: #856685;
+    border-color: #856685;
 }
 
 .btn-outline-primary:hover {
     color: var(--skin-primary-color-invert-1);
-    background-color: var(--skin-primary-color-1);
-    border-color: var(--skin-primary-color-1);
+    background-color: #856685;
+    border-color: #856685;
 }
 
 h1,
@@ -132,5 +171,6 @@ h6 {
 }
 
 header ~ #maincontent .container a:not(.btn-primary, .btn-outline-primary) {
-    color: var(--skin-primary-color-1);
+    color: #856685;
+    font-weight: bold;
 }

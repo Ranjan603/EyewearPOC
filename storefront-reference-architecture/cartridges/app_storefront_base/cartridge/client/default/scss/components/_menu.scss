@@ -296,8 +296,8 @@ button#popupCloseBtn {
 }
 #InsuranceFormPopupBody>form>button {
     color: white;
-    background: var(--skin-primary-color-1);
-    border: solid var(--skin-primary-color-1);
+    background: #856685;
+    border: solid #856685;
     padding: 5px 10px;
     margin-top: 20px;
     margin-left: 33.33%;
@@ -308,7 +308,7 @@ button#popupCloseBtn {
 }
 #InsuranceFormPopupBody form button:hover{
     background: transparent;
-    color:var(--skin-primary-color-1);
+    color:#856685;
 }
 .t2Input{
     margin-top:5px;

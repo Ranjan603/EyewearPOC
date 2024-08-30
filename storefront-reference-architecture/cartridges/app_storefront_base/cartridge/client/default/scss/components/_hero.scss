@@ -41,7 +41,7 @@ h1.page-title {
     position: relative;
     color: white;
     padding: 0.3125em 0.625em 0.3125em calc($grid-gutter-width / 2);
-    background-color: #{var(--skin-primary-color-1)};
+    background-color: #{#856685};
     display: inline-block;
     margin: 0.9375em 0;
     font-size: 1.5rem;
@@ -52,7 +52,7 @@ h1.page-title {
 
     &::before {
         content: "";
-        background-color: #{var(--skin-primary-color-1)};
+        background-color: #{#856685};
         height: 100%;
         width: 0;
         position: absolute;

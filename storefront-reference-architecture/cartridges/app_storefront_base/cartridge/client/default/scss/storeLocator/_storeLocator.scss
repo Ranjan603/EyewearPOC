@@ -1,12 +1,12 @@
 .store-locator-container {
     .btn-storelocator-search {
         background-color: $light-gray;
-        border-color: #{var(--skin-primary-color-1)};
+        border-color: #{#856685};
         border-radius: 0;
-        color: #{var(--skin-primary-color-1)};
+        color: #{#856685};
 
         &:hover {
-            background-color: #{var(--skin-primary-color-1)};
+            background-color: #{#856685};
             color: $light-gray;
         }
     }
