@@ -138,6 +138,19 @@ server.post('AddProduct', function (req, res, next) {
         });
     }
 
+    // Custom for only SFRA site - Custom attribute - imageURL in productLineItem of order.xml
+    var ali = currentBasket.allProductLineItems;
+    var col = require('*/cartridge/scripts/util/collections');
+    var i = 0;
+    col.forEach(ali, function (pli) {        
+        if (pli.UUID === result.uuid) {
+            Transaction.wrap(function () {
+                pli.custom.imageURL = cartModel.items[i].images.small[0].absURL; // eslint-disable-line no-param-reassign
+            });
+        }
+        i++;
+    });
+
     var reportingURL = cartHelper.getReportingUrlAddToCart(currentBasket, result.error);
 
     res.json({

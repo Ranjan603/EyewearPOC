@@ -479,6 +479,24 @@ RestService.prototype = {
 
                 svc.setURL(svcURL + svcPath);
 
+                var data = !empty(event.to.contactAttributes.subscriberAttributes) ? event.to.contactAttributes.subscriberAttributes : '';
+
+                var OrderMgr = require('dw/order/OrderMgr');
+                var order = OrderMgr.getOrder(data.OrderNumber);
+
+                // Adding custom inputs for SFMC data extension update
+                data.TotalAmount = order.getTotalGrossPrice().value;
+                data.email=order.customerEmail;
+                data.FirstName = order.getDefaultShipment().shippingAddress.firstName;
+                data.LastName = order.getDefaultShipment().shippingAddress.lastName;
+                data.phone = order.getDefaultShipment().shippingAddress.phone;
+
+                event = {
+                        "ContactKey": data.subscriberKey,
+                        "EventDefinitionKey": event.options.apiEventID,
+                        "Data": data
+                    }
+
                 return JSON.stringify(event);
             },
             parseResponse : parseResponse,
