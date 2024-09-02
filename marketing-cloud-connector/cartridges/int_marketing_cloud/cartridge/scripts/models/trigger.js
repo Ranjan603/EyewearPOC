@@ -145,9 +145,26 @@ function sendMessage() {
     /**
      * @type {dw.svc.Service}
      */
-    var msgSvc = require('int_marketing_cloud').restService('messagingSend');
-    var message = this.message;
-    return msgSvc.call(this.message);
+    // Custom - code for Order Confirmation - Emails using sfmc service call
+    if (this.hookID == 'app.communication.order.confirmation') {
+        var msgSvc = require('int_marketing_cloud').restService('interactionEvents');
+        var message = this.message;
+        
+        var subscriberKey = !empty(message.to.subscriberKey) ? message.to.subscriberKey : '';
+        var data = !empty(message.to.contactAttributes.subscriberAttributes) ? message.to.contactAttributes.subscriberAttributes : '';
+        data.subscriberKey = subscriberKey;
+        // Custom  For SFMC Personalisation or Interaction Studio - directly hits journey builder API events calls
+        message.options.apiEventID = 'APIEvent-4c621165-2d06-1881-afea-a7943f243b3d';
+        message.options.apiEventType = 'Journey'; // Journey or DE
+        data.OrderId = data.OrderNumber;
+           
+        return msgSvc.call(message); 
+    } else {
+        // For SFMC Triggered Send API calls 
+        var msgSvc = require('int_marketing_cloud').restService('messagingSend');
+        var message = this.message;
+        return msgSvc.call(this.message);
+    }
 }
 
 /**
