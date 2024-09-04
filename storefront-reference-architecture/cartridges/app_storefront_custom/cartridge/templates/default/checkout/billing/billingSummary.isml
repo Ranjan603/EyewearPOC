@@ -17,7 +17,8 @@
 </div>
 
 <!--- Payment information --->
-
-<div class="summary-details">
-
+<isset name="insApplied" value="${session.custom.insuranceApplied}" scope="page"/>
+<div class="summary-details" <isif condition="${insApplied !== null}">style="display:none;visibility:hidden"</isif>>
+    <span class="summary-section-label payment-info-label">${Resource.msg('label.order.payment.info', 'confirmation', null)}</span><br/>
+    <isinclude template="checkout/billing/paymentOptions/paymentOptionsSummary" />
 </div>

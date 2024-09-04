@@ -15,7 +15,7 @@
                 </label>
                 <select class="form-control" id="insurance" name="insurance">
                     <isloop items=${pdict.insuranceForm.insurance.options} var="option">
-                        <option id="${option.id}" value="${option.htmlValue}" <isif condition="${option.selected}">selected</isif>>${option.label}</option>
+                        <option id="${option.id}" value="${option.htmlValue}" <isif condition="${option.htmlValue === session.custom.insuranceApplied}">selected</isif>>${option.label}</option>
                     </isloop>
                 </select>
             </fieldset>
