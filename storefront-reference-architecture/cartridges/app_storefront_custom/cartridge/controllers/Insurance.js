@@ -43,7 +43,7 @@ server.post('UpdatePrices', consentTracking.consent, cache.applyDefaultCache, fu
         priceBook = PriceBookMgr.getPriceBook('usd-demo-insurance-prices-METLIFE');
     }
  
-    var defPriceBook = PriceBookMgr.getPriceBook('usd-m-list-prices');
+    var defPriceBook = PriceBookMgr.getPriceBook('usd-demo-list-prices');
    
     if (priceBook) {
         // Set the applicable price books for the session
