@@ -2,12 +2,17 @@
 
 .attribute {
     margin-top: 0.938em;
+    display: flex;
+  flex-wrap: wrap; /* Allows items to wrap onto multiple lines if needed */
 
     label {
         display: block;
     }
 }
-
+.with-gap {
+    margin: 5px 0px; /* Adjust spacing as needed */
+    line-height: 18px;
+  }
 .swatch a {
     text-decoration: none;
 }

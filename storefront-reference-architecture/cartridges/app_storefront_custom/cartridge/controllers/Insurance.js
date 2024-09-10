@@ -43,7 +43,7 @@ server.post('UpdatePrices', consentTracking.consent, cache.applyDefaultCache, fu
         priceBook = PriceBookMgr.getPriceBook('usd-demo-insurance-prices-METLIFE');
     }
  
-    var defPriceBook = PriceBookMgr.getPriceBook('usd-m-list-prices');
+    var defPriceBook = PriceBookMgr.getPriceBook('usd-demo-list-prices');
    
     if (priceBook) {
         // Set the applicable price books for the session
@@ -53,6 +53,36 @@ server.post('UpdatePrices', consentTracking.consent, cache.applyDefaultCache, fu
     }
  
     session.custom.insuranceApplied = insValue;
+ 
+    var currentUrl = req.httpHeaders.referer;
+ 
+    if (currentUrl) {
+        res.redirect(currentUrl);
+    } else {
+        res.redirect(URLUtils.url('Home-Show'));
+    }
+ 
+    next();
+});
+
+server.get('RemoveInsurance', consentTracking.consent, cache.applyDefaultCache, function (req, res, next) {
+    var Site = require('dw/system/Site');
+    var URLUtils = require('dw/web/URLUtils');
+    var PriceBookMgr = require('dw/catalog/PriceBookMgr');
+    var Transaction = require('dw/system/Transaction');
+ 
+    var sitePriceBooks;
+    sitePriceBooks = PriceBookMgr.getSitePriceBooks();
+ 
+   
+    if (sitePriceBooks) {
+        // Set the applicable price books for the session
+        Transaction.wrap(function() {
+            PriceBookMgr.setApplicablePriceBooks(sitePriceBooks.toArray());
+        });
+    }
+ 
+    session.custom.insuranceApplied = null;
  
     var currentUrl = req.httpHeaders.referer;
  

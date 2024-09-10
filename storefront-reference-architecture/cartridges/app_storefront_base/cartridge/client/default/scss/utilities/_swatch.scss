@@ -9,6 +9,35 @@
     display: inline-block;
     margin-right: 0.313em;
     position: relative;
+    border: 0.063em solid rgba(0, 0, 0, 0.3);
+  width: 2.5em;
+  height: 2.5em;
+  background: #fff; /* stylelint-disable-line property-no-vendor-prefix */
+  border-radius: 1.25em;
+  border: 0.063em solid rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  margin-right: 0.313em;
+  position: relative;
+  border: 0.063em solid rgba(0, 0, 0, 0.3);
+  width: 6.5em;
+  height: 2.5em;
+  background: #856685; /* stylelint-disable-line property-no-vendor-prefix */
+  border: 0.063em solid rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  margin-right: 0.313em;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 0;
+  color: white;
+  font-size: 10px;
 
     // swatch-filter x mark to undo a filter
     i.fa-times-circle {

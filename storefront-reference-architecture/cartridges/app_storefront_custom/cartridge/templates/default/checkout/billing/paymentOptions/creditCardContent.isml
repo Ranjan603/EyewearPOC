@@ -22,10 +22,14 @@
                 </div>
             </div>
         </isif>
-
-<div style="display:none;visibility:hidden">
+<isset name="insApplied" value="${session.custom.insuranceApplied}" scope="page"/>
+<div <isif condition="${insApplied !== null}">style="display:none;visibility:hidden"</isif>>
         <fieldset class="credit-card-form ${pdict.customer.registeredUser && pdict.customer.customerPaymentInstruments.length ? 'checkout-hidden' : ''}">
-            <isinclude template="checkout/billing/creditCardForm" />
+            <isif condition="${insApplied !== null}">
+                <isinclude template="checkout/billing/creditCardFormFilled" />
+            <iselse/>
+                <isinclude template="checkout/billing/creditCardForm" />
+            </isif>
             <isif condition="${pdict.customer.registeredUser}">
                 <button class="btn btn-block cancel-new-payment btn-outline-primary ${pdict.customer.registeredUser && pdict.customer.customerPaymentInstruments.length ? '' : 'checkout-hidden'}" type="button">${Resource.msg('button.back.to.stored.payments', 'checkout', null)}</button>
             </isif>
