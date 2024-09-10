@@ -27,6 +27,9 @@
             </fieldset>
             <button name="continue" id="conti-nue" class="popView" type="button">Continue</button>
             <button type="submit" name="submit" value="submit" id="sub-mit" class="popNone">Submit</button>
+            <isif condition="${session.custom.insuranceApplied !== null}">
+                <a href="${URLUtils.url('Insurance-RemoveInsurance')}" class="btn btn-block btn-outline-primary">${Resource.msg('button.remove.insurance','common',null)}</a>
+            </isif>
         </form>
     </div>
 </div>
