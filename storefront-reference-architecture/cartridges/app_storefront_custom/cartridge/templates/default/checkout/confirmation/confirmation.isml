@@ -16,7 +16,7 @@
         <div class="row">
             <div class="${pdict.returningCustomer ? 'col-sm-6 offset-sm-3' : 'col-sm-6 offset-sm-3 offset-md-0'}">
                 <iscomment> <h2 class="order-thank-you-msg">${Resource.msg('msg.placed.order.thank.you','confirmation',null)}</h2> </iscomment>
-                <isif condition="${pdict.customer.registeredUser}">
+                <isif condition="${session.custom.insuranceApplied}">
                     <h2 class="order-thank-you-msg">
                         <isprint value="${Resource.msgf('msg.placed.order.thank.you.registered.user', 'confirmation', null, pdict.order.orderNumber)}" encoding="htmlcontent" />
                     </h2>
