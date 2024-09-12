@@ -490,7 +490,7 @@ RestService.prototype = {
                 data.FirstName = order.getDefaultShipment().shippingAddress.firstName;
                 data.LastName = order.getDefaultShipment().shippingAddress.lastName;
                 data.phone = order.getDefaultShipment().shippingAddress.phone;
-
+                data.InsuranceApplied = session.custom.insuranceApplied !== null ? true : false;
                 event = {
                         "ContactKey": data.subscriberKey,
                         "EventDefinitionKey": event.options.apiEventID,
