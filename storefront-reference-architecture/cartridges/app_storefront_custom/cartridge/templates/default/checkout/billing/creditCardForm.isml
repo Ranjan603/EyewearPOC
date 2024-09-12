@@ -12,7 +12,7 @@
             ${creditFields.cardNumber.htmlName}">
             <label class="form-control-label" for="cardNumber">${Resource.msg('field.credit.card.number','creditCard',null)}</label>
             <div class="card-number-wrapper">
-                <input type="text" class="form-control cardNumber" id="cardNumber" value="4111111111111111"
+                <input type="text" class="form-control cardNumber" id="cardNumber"
                     value="${pdict.order.billing.payment.selectedPaymentInstruments
                         && pdict.order.billing.payment.selectedPaymentInstruments.length > 0
                         ? pdict.order.billing.payment.selectedPaymentInstruments[0].maskedCreditCardNumber||''
@@ -38,31 +38,14 @@
                 autocomplete="cc-exp-month"
                 aria-describedby="expirationMonthInvalidMessage">
                 <isloop items=${creditFields.expirationMonth.options} var="month">
-                    <iscomment> <option id="${month.id}" value="${month.htmlValue}"
+                    <option id="${month.id}" value="${month.htmlValue}"
                         <isif condition="${pdict.order.billing.payment.selectedPaymentInstruments
                             && pdict.order.billing.payment.selectedPaymentInstruments.length > 0
                             && month.id == pdict.order.billing.payment.selectedPaymentInstruments[0].expirationMonth}">
                             selected
                         </isif> >
                         ${month.label}
-                    </option> </iscomment>
-                    <option id="${month.id}" value="${month.htmlValue}"
-                        <isif condition="${month.id == '01'}">
-                            selected
-                        </isif>>
-                        ${month.label}
                     </option>
-                    <iscomment> <option id="${month.id}" value="${month.htmlValue}"
-                        <isif condition="${(pdict.order.billing.payment.selectedPaymentInstruments
-                            && pdict.order.billing.payment.selectedPaymentInstruments.length > 1
-                            && month.id == pdict.order.billing.payment.selectedPaymentInstruments[1].expirationMonth)
-                            || (!pdict.order.billing.payment.selectedPaymentInstruments 
-                            || pdict.order.billing.payment.selectedPaymentInstruments.length == 0 
-                            && month.id == '01')}">
-                            selected
-                        </isif>>
-                        ${month.label}
-                    </option> </iscomment>
                 </isloop>
             </select>
             <div class="invalid-feedback" id="expirationMonthInvalidMessage"></div>
@@ -79,17 +62,13 @@
                 aria-describedby="expirationYearInvalidMessage">
                 <option value="${pdict.forms.billingForm.creditCardFields.expirationYear.options[0].htmlValue}">${pdict.forms.billingForm.creditCardFields.expirationYear.options[0].label}</option>
                 <isloop items=${pdict.expirationYears} var="year">
-                    <iscomment> <option id="${year.toFixed(0)}" value="${year.toFixed(0)}"
+                    <option id="${year.toFixed(0)}" value="${year.toFixed(0)}"
                         <isif condition="${pdict.order.billing.payment.selectedPaymentInstruments
                             && pdict.order.billing.payment.selectedPaymentInstruments.length > 0
                             && year == pdict.order.billing.payment.selectedPaymentInstruments[0].expirationYear}">
                                 selected
                         </isif> >
-                    <isprint value="${year}" formatter="####" /></option> </iscomment>
-
-                    <option id="${year.toFixed(0)}" value="${year.toFixed(1)}" selected >
                     <isprint value="${year}" formatter="####" /></option>
-
                 </isloop>
             </select>
             <div class="invalid-feedback" id="expirationYearInvalidMessage"></div>
@@ -112,7 +91,7 @@
                 </span>
             </button>
 
-            <input type="text" class="form-control securityCode" id="securityCode" value="123"
+            <input type="text" class="form-control securityCode" id="securityCode"
                 <isprint value=${creditFields.securityCode.attributes} encoding="off"/>
                 aria-describedby="securityCodeInvalidMessage" >
             <div class="invalid-feedback" id="securityCodeInvalidMessage"></div>
